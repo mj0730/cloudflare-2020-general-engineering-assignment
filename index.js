@@ -1,7 +1,5 @@
 const Router = require('./router')
 
-const DOMAIN = 'https://example.com'
-
 const links = [
     { name: 'React', url: 'https://reactjs.org' },
     { name: 'Angular', url: 'https://angularjs.org' },
@@ -12,7 +10,7 @@ addEventListener('fetch', event => {
     event.respondWith(handleRequest(event.request))
 })
 
-async function handler(request) {
+async function handler() {
     const init = {
         headers: { 'content-type': 'application/json' },
     }
