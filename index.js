@@ -34,22 +34,10 @@ async function addLinks() {
         'https://static-links-page.signalnerve.workers.dev'
     )
 
-    const rewriteLinks = await new HTMLRewriter()
-        .on('div#links', new LinksTransformer(links))
-        .transform(html)
-
-    const rewriteProfile = await new HTMLRewriter()
-        .on('*', new ProfileTransformer())
-        .transform(rewriteLinks)
-
-    const rewriteSocial = await new HTMLRewriter()
-        .on('*', new SocialTransformer())
-        .transform(rewriteProfile)
-
-    return rewriteSocial
+    return new HTMLRewriter().on('*', new Transformer(links)).transform(html)
 }
 
-class LinksTransformer {
+class Transformer {
     constructor(links) {
         this.links = links
     }
@@ -64,12 +52,6 @@ class LinksTransformer {
                 })
             )
         }
-    }
-}
-
-class ProfileTransformer {
-    element(element) {
-        const elementId = element.getAttribute('id')
 
         const userName = 'Michael'
         const userImg = 'https://picsum.photos/id/237/200/300'
@@ -85,12 +67,7 @@ class ProfileTransformer {
         if (elementId === 'name') {
             element.setInnerContent(userName)
         }
-    }
-}
 
-class SocialTransformer {
-    element(element) {
-        const elementId = element.getAttribute('id')
         const socialLinks = [
             {
                 icon:
