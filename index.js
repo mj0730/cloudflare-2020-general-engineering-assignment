@@ -95,5 +95,13 @@ class Transformer {
                 })
             })
         }
+
+        if (element.tagName === 'title') {
+            element.setInnerContent('Michael Johnson')
+        }
+
+        if (element.tagName === 'body') {
+            element.setAttribute('class', 'bg-black')
+        }
     }
 }
