@@ -3,4 +3,4 @@ worker/
 .cargo-ok
 package-lock.json
 *.toml
-dist/
+dist
